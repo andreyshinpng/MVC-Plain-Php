@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Services\Db;
+
 class Post
 {
+    protected $db;
+
     public $slug;
 
     public $title;
@@ -13,6 +17,7 @@ class Post
     public $body;
 
     public $author;
+
 
     public function __construct(string $slug, string $title, string $excerpt, string $body, User $author)
     {
@@ -25,6 +30,7 @@ class Post
 
     public static function getPosts()
     {
+
         return [
             new Post('my-first-post', 'My First Post', 'Here is an excerpt', 'Lorem ipsum here', new User('andreyshin')),
             new Post('my-second-post', 'My Second Post', 'Here is an excerpt', 'Lorem ipsum here', new User('andreyshin')),
