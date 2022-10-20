@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Services\Db;
 
-class Post
+class Post extends ActiveRecordEntity
 {
     private $id;
 
@@ -18,16 +18,9 @@ class Post
 
     private $author_id;
 
-    public static function findAll()
+    public static function getTableName(): string
     {
-        $db = new Db();
-        return $db->query('SELECT * FROM `posts` ORDER BY `id` DESC;', [], Post::class);
-    }
-
-    public static function findBySlug(string $slug)
-    {
-        $db = new Db();
-        return ($db->query("SELECT * FROM `posts` WHERE `slug` = '{$slug}';", [], Post::class))[0];
+        return 'posts';
     }
 
     public function getSlug()
@@ -53,6 +46,11 @@ class Post
     public function getAuthorId()
     {
         return $this->author_id;
+    }
+
+    public function getAuthor()
+    {
+        return User::findById($this->author_id);
     }
 
 }

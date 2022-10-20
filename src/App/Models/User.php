@@ -2,16 +2,29 @@
 
 namespace App\Models;
 
-class User
+class User extends ActiveRecordEntity
 {
-    public $name;
+    protected $id;
 
-    public function __construct(string $name)
+    protected $username;
+
+    protected $email;
+
+    protected $role;
+
+    protected $password_hash;
+
+    protected $auth_token;
+
+    protected $created_at;
+
+    public static function getTableName(): string
     {
-        $this->name = $name;
+        return 'users';
     }
 
-    public function getName() {
-        return $this->name;
+    public function getUsername() {
+        return $this->username;
     }
+
 }
