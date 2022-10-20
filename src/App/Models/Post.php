@@ -21,7 +21,7 @@ class Post
     public static function findAll()
     {
         $db = new Db();
-        return $db->query('SELECT * FROM `posts`;', [], Post::class);
+        return $db->query('SELECT * FROM `posts` ORDER BY `id` DESC;', [], Post::class);
     }
 
     public static function findBySlug(string $slug)
