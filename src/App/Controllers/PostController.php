@@ -9,8 +9,6 @@ use App\View\View;
 
 class PostController
 {
-    public $db;
-
     public function __construct()
     {
         $this->view = new View(__DIR__ . '/../../../templates');

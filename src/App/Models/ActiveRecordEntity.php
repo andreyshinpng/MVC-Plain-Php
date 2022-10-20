@@ -8,20 +8,20 @@ abstract class ActiveRecordEntity
 {
     public static function findAll(): array
     {
-        $db = new Db();
+        $db = Db::getInstance();
         return $db->query('SELECT * FROM `' . static::getTableName() . '` ORDER BY `id`;', [], static::class);
     }
 
     public static function findById(int $id): ?self
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $entities = $db->query("SELECT * FROM `" . static::getTableName() . "` WHERE `id` = '{$id}';", [], static::class);
         return $entities ? $entities[0] : null;
     }
 
     public static function findBySlug(string $slug): ?self
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $entities = $db->query("SELECT * FROM `" . static::getTableName() . "` WHERE `slug` = '{$slug}';", [], static::class);
         return $entities ? $entities[0] : null;
     }

@@ -6,8 +6,21 @@ class Db
 {
     private $pdo;
 
-    public function __construct()
+    public static $instancesCount = 0;
+
+    private static $instance;
+
+    public static function getInstance(): self
     {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    private function __construct()
+    {
+        self::$instancesCount++;
         $dbSettings = (require __DIR__ . '/../../settings.php')['db'];
 
         $this->pdo = new \PDO(
