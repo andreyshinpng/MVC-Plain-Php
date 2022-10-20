@@ -14,32 +14,23 @@ class PostController
     public function __construct()
     {
         $this->view = new View(__DIR__ . '/../../../templates');
-        $this->db = new Db();
     }
 
     public function showAllPosts()
     {
-        $posts = $this->db->query('SELECT * FROM `posts`;', [], Post::class);
-//        echo '<pre>';
-//        var_dump($posts);
-//        echo '</pre>';
-//        die;
-
         $this->view->renderHtml('posts.php', [
-            'posts' => $posts
+            'posts' => Post::findAll()
         ]);
     }
 
-    public function showPost($slug)
+    public function showPostBySlug($slug)
     {
-        $post = $this->db->query("SELECT * FROM `posts` WHERE `slug`='{$slug}';", [], Post::class);
-
-        if ($post === []) {
-            $this->view->renderHtml("errors/404.php", [], 404);
-        }
+//        if ($post === []) {
+//            $this->view->renderHtml("errors/404.php", [], 404);
+//        }
 
         $this->view->renderHtml('post.php', [
-            'post' => $post[0]
+            'post' => Post::findBySlug($slug)
         ]);
     }
 }

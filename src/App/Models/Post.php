@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\Db;
+
 class Post
 {
     private $id;
@@ -16,18 +18,16 @@ class Post
 
     private $author_id;
 
-    public static function getPosts()
+    public static function findAll()
     {
-
+        $db = new Db();
+        return $db->query('SELECT * FROM `posts`;', [], Post::class);
     }
 
-    public static function findBySlug($slug, $posts)
+    public static function findBySlug(string $slug)
     {
-        foreach ($posts as $key => $value) {
-            if ($value->slug === $slug) {
-                return $value;
-            }
-        }
+        $db = new Db();
+        return ($db->query("SELECT * FROM `posts` WHERE `slug` = '{$slug}';", [], Post::class))[0];
     }
 
     public function getSlug()
