@@ -1,8 +1,8 @@
 <?php include 'components/header.php'; ?>
-<?php foreach (array_reverse($posts) as $key => $value) : ?>
-    <h2><a href="posts/<?= $value['slug'] ?>"><?= $value['title'] ?></a></h2>
-    <p><b>Author: </b><?php echo $db; ?></p>
-    <p><?= $value['excerpt'] ?></p>
+<?php foreach (array_reverse($posts) as $post) : ?>
+    <h2><a href="posts/<?= $post->getSlug() ?>"><?= $post->getTitle() ?></a></h2>
+    <p><b>Author: </b><?= $post->getAuthorId() ?></p>
+    <p><?= $post->getExcerpt() ?></p>
     <hr>
 <?php endforeach ?>
 <?php include 'components/footer.php'; ?>

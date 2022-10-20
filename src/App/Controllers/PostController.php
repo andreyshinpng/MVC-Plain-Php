@@ -19,7 +19,11 @@ class PostController
 
     public function showAllPosts()
     {
-        $posts = $this->db->query('SELECT * FROM `posts`;');
+        $posts = $this->db->query('SELECT * FROM `posts`;', [], Post::class);
+//        echo '<pre>';
+//        var_dump($posts);
+//        echo '</pre>';
+//        die;
 
         $this->view->renderHtml('posts.php', [
             'posts' => $posts
@@ -28,13 +32,10 @@ class PostController
 
     public function showPost($slug)
     {
-        $post = $this->db->query("SELECT * FROM `posts` WHERE `slug`='{$slug}';");
+        $post = $this->db->query("SELECT * FROM `posts` WHERE `slug`='{$slug}';", [], Post::class);
 
         if ($post === []) {
-            echo '<pre>';
-            var_dump($post);
-            echo '</pre>';
-            die();
+            $this->view->renderHtml("errors/404.php", [], 404);
         }
 
         $this->view->renderHtml('post.php', [

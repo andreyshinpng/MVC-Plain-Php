@@ -35,3 +35,7 @@
 a, a:visited {
     color: darkgreen;
 }
+
+p {
+    line-height: 1.4;
+}
