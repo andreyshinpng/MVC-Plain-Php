@@ -25,10 +25,10 @@ class PostController
 
     public function showPostBySlug($slug)
     {
-//        if ($post === []) {
-//            $this->view->renderHtml("errors/404.php", [], 404);
-//        }
-
+        if (Post::findBySlug($slug) == null) {
+            $this->view->renderHtml('errors/404.php', [], 404);
+            exit;
+        }
         $this->view->renderHtml('post.php', [
             'post' => Post::findBySlug($slug)
         ]);
