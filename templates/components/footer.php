@@ -5,7 +5,7 @@
 </td>
 </tr>
 <tr>
-    <td class="footer" colspan="2">Все права защищены (c) Мой блог</td>
+    <td class="footer" colspan="2">My Blog (c) 2022</td>
 </tr>
 </table>
 

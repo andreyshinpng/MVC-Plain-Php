@@ -1,4 +1,4 @@
-<div class="sidebarHeader">Меню</div>
+<div class="sidebarHeader">Menu</div>
 <ul>
-    <li><a href="/www/posts">Статьи</a></li>
+    <li><a href="/www/posts">Articles</a></li>
 </ul>
