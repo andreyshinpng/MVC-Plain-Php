@@ -1,1 +1,1 @@
-"# mvc_blog" 
+MVC architecture with default design patterns on plain php
