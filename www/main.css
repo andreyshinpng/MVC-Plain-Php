@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 * {
-    font-family: "Microsoft Sans Serif", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .layout {
@@ -48,4 +50,8 @@ a:hover {
 
 p {
     line-height: 1.4;
+}
+
+h2 {
+    color: #225ef1;
 }

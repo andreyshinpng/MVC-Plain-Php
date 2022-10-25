@@ -6,26 +6,19 @@ use App\Services\Db;
 
 class Post extends ActiveRecordEntity
 {
-    private $id;
+    protected $id;
 
-    private $slug;
+    protected $title;
 
-    private $title;
+    protected $excerpt;
 
-    private $excerpt;
+    protected $body;
 
-    private $body;
-
-    private $author_id;
+    protected $author_id;
 
     public static function getTableName(): string
     {
         return 'posts';
-    }
-
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     public function getTitle()
@@ -51,6 +44,26 @@ class Post extends ActiveRecordEntity
     public function getAuthor()
     {
         return User::findById($this->author_id);
+    }
+
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
+
+    public function setExcerpt(string $excerpt)
+    {
+        $this->excerpt = $excerpt;
+    }
+
+    public function setBody(string $body)
+    {
+        $this->body = $body;
+    }
+
+    public function setAuthor($author)
+    {
+        $this->authorId = $author->getId();
     }
 
 }

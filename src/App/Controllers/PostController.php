@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Services\Db;
 use App\View\View;
+use ReflectionObject;
 
 class PostController
 {
@@ -21,9 +22,9 @@ class PostController
         ]);
     }
 
-    public function showPostBySlug($slug)
+    public function showPostById(int $id)
     {
-        $post = Post::findBySlug($slug);
+        $post = Post::findById($id);
         if ($post == null) {
             $this->view->renderHtml('errors/404.php', [], 404);
             exit;
@@ -31,5 +32,32 @@ class PostController
         $this->view->renderHtml('post.php', [
             'post' => $post,
         ]);
+    }
+
+    public function editPost(int $id)
+    {
+        $post = Post::findById($id);
+        if ($post == null) {
+            $this->view->renderHtml('errors/404.php', [], 404);
+            exit;
+        }
+
+        $post->setTitle('Hello world!');
+        $post->save();
+//        $this->view->renderHtml('edit.php', [
+//            'post' => ''
+//        ]);
+    }
+
+    public function addPost(): void
+    {
+        $author = User::getById(1);
+
+        $post = new Post();
+        $post->setAuthor($author);
+        $post->setTitle('New post title');
+        $post->setBody('New post body');
+
+        $post->save();
     }
 }

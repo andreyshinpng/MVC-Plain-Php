@@ -8,15 +8,15 @@ class User extends ActiveRecordEntity
 
     protected $username;
 
-    protected $email;
-
-    protected $role;
-
-    protected $password_hash;
-
-    protected $auth_token;
-
-    protected $created_at;
+//    protected $email;
+//
+//    protected $role;
+//
+//    protected $password_hash;
+//
+//    protected $auth_token;
+//
+//    protected $created_at;
 
     public static function getTableName(): string
     {
