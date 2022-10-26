@@ -2,13 +2,29 @@
 
 namespace App\Services;
 
+use App\Exceptions\DbException;
+
 class Db
 {
     private $pdo;
 
-    public static $instancesCount = 0;
-
     private static $instance;
+
+    private function __construct()
+    {
+        $dbSettings = (require __DIR__ . '/../../settings.php')['db'];
+
+        try {
+            $this->pdo = new \PDO(
+                'mysql:host=' . $dbSettings['host'] . ';dbname=' . $dbSettings['dbname'],
+                $dbSettings['user'],
+                $dbSettings['password']
+            );
+            $this->pdo->exec('SET NAMES UTF-8');
+        } catch (\PDOException $e) {
+            throw new DbException('Database connection error: ' . $e->getMessage());
+        }
+    }
 
     public static function getInstance(): self
     {
@@ -16,19 +32,6 @@ class Db
             self::$instance = new self();
         }
         return self::$instance;
-    }
-
-    private function __construct()
-    {
-        self::$instancesCount++;
-        $dbSettings = (require __DIR__ . '/../../settings.php')['db'];
-
-        $this->pdo = new \PDO(
-            'mysql:host=' . $dbSettings['host'] . ';dbname=' . $dbSettings['dbname'],
-            $dbSettings['user'],
-            $dbSettings['password']
-        );
-        $this->pdo->exec('SET NAMES UTF-8');
     }
 
     public function query(string $sql, array $params = [], string $className = 'stdClass'): ?array

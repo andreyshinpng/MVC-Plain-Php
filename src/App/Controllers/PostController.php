@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\NotFoundException;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\Db;
@@ -26,8 +27,7 @@ class PostController
     {
         $post = Post::findById($id);
         if ($post == null) {
-            $this->view->renderHtml('errors/404.php', [], 404);
-            exit;
+            throw new NotFoundException();
         }
         $this->view->renderHtml('post.php', [
             'post' => $post,
@@ -38,15 +38,11 @@ class PostController
     {
         $post = Post::findById($id);
         if ($post == null) {
-            $this->view->renderHtml('errors/404.php', [], 404);
-            exit;
+            throw new NotFoundException();
         }
 
         $post->setTitle('Hello world!');
         $post->save();
-//        $this->view->renderHtml('edit.php', [
-//            'post' => ''
-//        ]);
     }
 
     public function addPost(): void
