@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\Db;
+use http\Exception\InvalidArgumentException;
 
 class Post extends ActiveRecordEntity
 {
@@ -65,5 +66,4 @@ class Post extends ActiveRecordEntity
     {
         $this->authorId = $author->getId();
     }
-
 }
